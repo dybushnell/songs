@@ -25,30 +25,35 @@ class SongsController < ApplicationController
     erb :"/songs/show.html"
   end
 
-  # GET: /songs/5/edit
+  # edit GET: /songs/5/edit
   get "/songs/:id/edit" do
     @song = Song.find(params[:id])
     # binding.pry
     erb :"/songs/edit.html"
   end
 
-  # PATCH: /songs/5
-  post "/songs/:id" do
+  # edit PATCH: /songs/5
+  patch "/songs/:id" do
     @song = Song.find(params[:id])
-    # params
-    # binding.pry
-    if params[:name] == nil
-      @song[:name] = @song[:name]
-    else
-      @song[:name] = params[:name]
-    end
-    if params[:release_year] == nil
-      @song[:release_year] = @song[:release_year]
-    else
-      @song[:release_year] = params[:name]
-    end
-    redirect "/songs/:id"
+      if params[:name] == ""
+        params[:name] = @song.name
+      else 
+        @song.update(name: params[:name])
+      end
+      if params[:release_year] == ""
+        params[:release_year] = @song.release_year
+      else
+        @song.update(release_year: params[:release_year])
+      end
+      # @song.update(name: params[:name], release_year: params[:release_year])
+      # binding.pry
+    redirect "/songs/#{@song.id}"
   end
+
+  # post '/songs/:id' do 
+  #   puts "here"
+  #   binding.pry
+  # end 
 
   # DELETE: /songs/5/delete
   get "/songs/:id/delete" do

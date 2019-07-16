@@ -1,7 +1,8 @@
 <!-- <h1>Insert the form to edit an instance of your model here.</h1> -->
 
 <p>Edit <%= @song[:name] %></p>
-<form action="/songs/<%= @song[:id] %>" method="post"> 
+<form action="/songs/<%=@song.id%>" method="post"> 
+    <input type="hidden" name="_method" value="patch">
     <input type="text" name="name" placeholder="enter new name" >
     <input type="number" name="release_year" placeholder="enter new release year">
         <input type="submit" value="submit"></input>
