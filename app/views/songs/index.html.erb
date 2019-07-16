@@ -1,0 +1,6 @@
+<ul>
+    <% @songs.each do |song_instance|%>
+        <li><%= song_instance.name %> was released in <%= song_instance.release_year %></li>
+    
+      <% end %>
+  </ul>
